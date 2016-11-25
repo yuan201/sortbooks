@@ -1,0 +1,14 @@
+{
+    "python": {
+        "keywords": "python, django, flask, openstack",
+        "folder": "software\\python"
+    },
+    "javascript": {
+        "keywords": "javascript, angular, angularjs, react, jquery",
+        "folder": "software\\javascript"
+    },
+    "java": {
+        "keywords": "java",
+        "folder": "software\\java"
+    }
+}
