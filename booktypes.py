@@ -2,12 +2,13 @@ import json
 import os.path
 import re
 import shutil
+import weakref
 
 
 class BookType:    
 
-    def __init__(self, type, keywords, folder):
-        self.type = type
+    def __init__(self, type_, keywords, folder):
+        self.type_ = type_
         self.keywords = keywords
         self.folder = folder
 
@@ -53,15 +54,18 @@ class Classifier:
     class UnknownType(exception):
         pass
     
-    def __init__(self, jsonfile):
+    def __init__(self, fconfig, freport):
         self.booktypes = []
         self.keywords = {}
-        self.jsonfile = jsonfile
+        self.fconfig = fconfig
+        self.freport = freport
         
     def classify(self, book):
         for w in book.keywords:
             if w in self.keywords:
                 book.type = keywords[w]
+                with open(self.freport, 'a') as f:
+                    f.write("{} => {}".format(book.name, book.type_)
                 return
         raise self.CannotClassify(book.name)
                 
@@ -91,3 +95,5 @@ class Classifier:
         """update keywords by a book with known type"""
         if book.type not in self.booktypes:
             raise self.UnknownType(book.type)
+
+    
